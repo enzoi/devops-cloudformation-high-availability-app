@@ -13,7 +13,7 @@ Parameters:
         Description: InstantType for AutoScalingGroup Launch Configuration
         Type: String
         Default: "t3.small"
-        
+    
 Resources:         
     LBSecurityGroup:
         Type: AWS::EC2::SecurityGroup
@@ -140,7 +140,6 @@ Resources:
             AdjustmentType: ChangeInCapacity
             AutoScalingGroupName: !Ref WebAppGroup
             Cooldown: '1'
-            PolicyType: TargetTrackingScaling
             ScalingAdjustment: '1'
             
     CPUAlarmHigh:
@@ -190,11 +189,4 @@ Outputs:
         Description: The DNSName of the load balancer
         Value: !Join [ "", [ "http://", !GetAtt WebAppLB.DNSName ]]
         Export:
-            Name: !Sub ${EnvironmentName}-DNS-NAME
-
-    WebServerSecurityGroup:
-        Description: Reference for RDS DB
-        Value: !Ref WebServerSecurityGroup
-        Export:
-            Name: !Sub ${EnvironmentName}-WebServer-SG
-    
+            Name: !Sub ${EnvironmentName}-DNS-NAME   
